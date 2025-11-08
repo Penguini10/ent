@@ -112,6 +112,20 @@ func (ldc *LogicalDiskCreate) SetNillableBitlockerStatus(s *string) *LogicalDisk
 	return ldc
 }
 
+// SetBitlockerRecoveryKey sets the "bitlocker_recovery_key" field.
+func (ldc *LogicalDiskCreate) SetBitlockerRecoveryKey(s string) *LogicalDiskCreate {
+	ldc.mutation.SetBitlockerRecoveryKey(s)
+	return ldc
+}
+
+// SetNillableBitlockerRecoveryKey sets the "bitlocker_recovery_key" field if the given value is not nil.
+func (ldc *LogicalDiskCreate) SetNillableBitlockerRecoveryKey(s *string) *LogicalDiskCreate {
+	if s != nil {
+		ldc.SetBitlockerRecoveryKey(*s)
+	}
+	return ldc
+}
+
 // SetOwnerID sets the "owner" edge to the Agent entity by ID.
 func (ldc *LogicalDiskCreate) SetOwnerID(id string) *LogicalDiskCreate {
 	ldc.mutation.SetOwnerID(id)
@@ -229,6 +243,10 @@ func (ldc *LogicalDiskCreate) createSpec() (*LogicalDisk, *sqlgraph.CreateSpec) 
 	if value, ok := ldc.mutation.BitlockerStatus(); ok {
 		_spec.SetField(logicaldisk.FieldBitlockerStatus, field.TypeString, value)
 		_node.BitlockerStatus = value
+	}
+	if value, ok := ldc.mutation.BitlockerRecoveryKey(); ok {
+		_spec.SetField(logicaldisk.FieldBitlockerRecoveryKey, field.TypeString, value)
+		_node.BitlockerRecoveryKey = value
 	}
 	if nodes := ldc.mutation.OwnerIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
@@ -419,6 +437,24 @@ func (u *LogicalDiskUpsert) ClearBitlockerStatus() *LogicalDiskUpsert {
 	return u
 }
 
+// SetBitlockerRecoveryKey sets the "bitlocker_recovery_key" field.
+func (u *LogicalDiskUpsert) SetBitlockerRecoveryKey(v string) *LogicalDiskUpsert {
+	u.Set(logicaldisk.FieldBitlockerRecoveryKey, v)
+	return u
+}
+
+// UpdateBitlockerRecoveryKey sets the "bitlocker_recovery_key" field to the value that was provided on create.
+func (u *LogicalDiskUpsert) UpdateBitlockerRecoveryKey() *LogicalDiskUpsert {
+	u.SetExcluded(logicaldisk.FieldBitlockerRecoveryKey)
+	return u
+}
+
+// ClearBitlockerRecoveryKey clears the value of the "bitlocker_recovery_key" field.
+func (u *LogicalDiskUpsert) ClearBitlockerRecoveryKey() *LogicalDiskUpsert {
+	u.SetNull(logicaldisk.FieldBitlockerRecoveryKey)
+	return u
+}
+
 // UpdateNewValues updates the mutable fields using the new values that were set on create.
 // Using this option is equivalent to using:
 //
@@ -596,6 +632,27 @@ func (u *LogicalDiskUpsertOne) UpdateBitlockerStatus() *LogicalDiskUpsertOne {
 func (u *LogicalDiskUpsertOne) ClearBitlockerStatus() *LogicalDiskUpsertOne {
 	return u.Update(func(s *LogicalDiskUpsert) {
 		s.ClearBitlockerStatus()
+	})
+}
+
+// SetBitlockerRecoveryKey sets the "bitlocker_recovery_key" field.
+func (u *LogicalDiskUpsertOne) SetBitlockerRecoveryKey(v string) *LogicalDiskUpsertOne {
+	return u.Update(func(s *LogicalDiskUpsert) {
+		s.SetBitlockerRecoveryKey(v)
+	})
+}
+
+// UpdateBitlockerRecoveryKey sets the "bitlocker_recovery_key" field to the value that was provided on create.
+func (u *LogicalDiskUpsertOne) UpdateBitlockerRecoveryKey() *LogicalDiskUpsertOne {
+	return u.Update(func(s *LogicalDiskUpsert) {
+		s.UpdateBitlockerRecoveryKey()
+	})
+}
+
+// ClearBitlockerRecoveryKey clears the value of the "bitlocker_recovery_key" field.
+func (u *LogicalDiskUpsertOne) ClearBitlockerRecoveryKey() *LogicalDiskUpsertOne {
+	return u.Update(func(s *LogicalDiskUpsert) {
+		s.ClearBitlockerRecoveryKey()
 	})
 }
 
@@ -940,6 +997,27 @@ func (u *LogicalDiskUpsertBulk) UpdateBitlockerStatus() *LogicalDiskUpsertBulk {
 func (u *LogicalDiskUpsertBulk) ClearBitlockerStatus() *LogicalDiskUpsertBulk {
 	return u.Update(func(s *LogicalDiskUpsert) {
 		s.ClearBitlockerStatus()
+	})
+}
+
+// SetBitlockerRecoveryKey sets the "bitlocker_recovery_key" field.
+func (u *LogicalDiskUpsertBulk) SetBitlockerRecoveryKey(v string) *LogicalDiskUpsertBulk {
+	return u.Update(func(s *LogicalDiskUpsert) {
+		s.SetBitlockerRecoveryKey(v)
+	})
+}
+
+// UpdateBitlockerRecoveryKey sets the "bitlocker_recovery_key" field to the value that was provided on create.
+func (u *LogicalDiskUpsertBulk) UpdateBitlockerRecoveryKey() *LogicalDiskUpsertBulk {
+	return u.Update(func(s *LogicalDiskUpsert) {
+		s.UpdateBitlockerRecoveryKey()
+	})
+}
+
+// ClearBitlockerRecoveryKey clears the value of the "bitlocker_recovery_key" field.
+func (u *LogicalDiskUpsertBulk) ClearBitlockerRecoveryKey() *LogicalDiskUpsertBulk {
+	return u.Update(func(s *LogicalDiskUpsert) {
+		s.ClearBitlockerRecoveryKey()
 	})
 }
 
